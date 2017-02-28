@@ -26,4 +26,4 @@ yarn
 ## Run project in simulator or usb connected device
 `react-native run-android`
 
-Obs.: You will need put some image to test this project in simulator
+*IMPORTANT NOTE*: You will need put some image in Camera's folder to test this project in simulator
