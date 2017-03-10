@@ -22,7 +22,7 @@ const PICKER_OPTIONS = {
 };
 
 export default class FBSDKTest extends Component {
-    // Share the link using the share dialog.
+    // Share the photo using the share dialog.
     _sharePhotoWithShareDialog = shareContent => {
         ShareDialog.canShow(shareContent).then(
             function(canShow) {
@@ -33,11 +33,15 @@ export default class FBSDKTest extends Component {
         ).then(
             function(result) {
                 console.log(result);
-                if (result.isCancelled) {
-                    alert('Share cancelled');
+                if (!result) {
+                    alert('Share result is undefined!');
                 } else {
-                    alert('Share success with postId: '
-                    + result.postId);
+                    if (result.isCancelled) {
+                        alert('Share cancelled by user');
+                    } else {
+                        alert('Share success with postId: '
+                        + result.postId);
+                    }
                 }
             },
             function(error) {
@@ -49,10 +53,10 @@ export default class FBSDKTest extends Component {
     _showImageGallery = () => {
         ImagePicker.launchImageLibrary(PICKER_OPTIONS, (response)  => {
             if (response.didCancel) {
-                console.log('User cancelled image picker');
+                alert('User cancelled image picker');
             }
             else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
+                alert('ImagePicker Error: ' + response.error);
             }
             else {
                 // Build up a shareable photo.
